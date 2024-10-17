@@ -66,7 +66,7 @@ const mc_rtc::Configuration & loadPanelConfiguration()
   {
     mc_rtc::Configuration configOut;
     auto config_path = getConfigPath();
-    if(bfs::exists(config_path) && bfs::is_regular(config_path)) { configOut.load(config_path.string()); }
+    if(bfs::exists(config_path) && bfs::is_regular_file(config_path)) { configOut.load(config_path.string()); }
     return configOut;
   }();
   return config;
@@ -78,13 +78,13 @@ void savePanelConfiguration(const mc_rtc::Configuration & config)
   if(!bfs::exists(config_directory)) { bfs::create_directories(config_directory); }
   if(!bfs::is_directory(config_directory))
   {
-    mc_rtc::log::error("Cannot save configuration to {}, {} is not a directory", config_directory, config_directory);
+    mc_rtc::log::error("Cannot save configuration to {}, {} is not a directory", config_directory.string(), config_directory.string());
     return;
   }
   auto config_path = getConfigPath();
-  if(bfs::exists(config_path) && !bfs::is_regular(config_path))
+  if(bfs::exists(config_path) && !bfs::is_regular_file(config_path))
   {
-    mc_rtc::log::error("Cannot save configuration to {}, {} is not a regular file", config_path, config_path);
+    mc_rtc::log::error("Cannot save configuration to {}, {} is not a regular file", config_path.string(), config_path.string());
     return;
   }
   config.save(config_path.string());

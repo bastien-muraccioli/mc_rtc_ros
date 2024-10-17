@@ -3,7 +3,6 @@
  */
 
 #include "DisplayTrajectoryWidget.h"
-
 #include <mc_rbdyn/configuration_io.h>
 
 namespace mc_rtc_rviz
